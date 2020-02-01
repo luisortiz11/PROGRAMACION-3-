@@ -1,7 +1,7 @@
 #Validar un nombre
 import re
 
-#Lista de nombres prohibidos, fuente: http://fffff.at/googles-official-list-of-bad-words/
+#Lista de nombres prohibidos
 nompro = ["x","xx", "xxx"]
 #variable para ciclo while
 run = True

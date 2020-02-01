@@ -12,15 +12,16 @@ while run == True:
     #Entrada: nombres
     nombre = input("Escribe un nombre y presiona enter: ")
     #Condicion que limita el formato de nombre a validar
-    if nombre.isalpha() == True:
+    if nombre.isalnum() == True:
         #Ciclo para comparar entrada "nombre" con cada elemento de lista "nompro"
         for elemento in nompro:
             #Expresion regular que busca si existe por lo menos una coincidencia entre "nombre" y algun elemento de lista "nompro"
-            if re.search(rf"\b(?=\w){nombre}\b(?!\w)", elemento, re.IGNORECASE) != None:
+            if elemento == nombre:
                 #Indicador de por lo menos 1 coincidencia entre "nombre" y algun elemento de "nompro"
                 z = 1
                 #Mensaje de coincidencia
                 print("NO se aceptan palabra prohibidas")
+                break
         #Si no se encontró ninguna coincidencia, nombre validado
         if z == 0:
             #mensaje de validacion

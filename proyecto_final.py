@@ -1,51 +1,64 @@
 #Autenticacion rudimentaria
 import re
 import os
-import time
 
-def print_menu():       ## Your menu design here
+usr_list = {}
+
+def print_menu():
     print (30 * "-" , "MENU" , 30 * "-")
     print ("1. Crear credenciales")
     print ("2. Validar credenciales")
     print ("3. Salir")
     print (67 * "-")
 
-usr_list = []
-pasw_list = []
-
-
-while True:
-    a = 0
-    print_menu()    ## Displays menu
-    choice = int(input("Entre el numero de una opcion [1-3]: "))
+def print_menu_cred():
+    print (30 * "-" , "CREAR CREDENCIALES" , 30 * "-")
+    usr = input("Nuevo usuario: ")
+    pasw = input("Nueva contraseña: ")
+    usr_list[usr] = pasw
     os.system('cls')
-    if choice==1:
-        print (30 * "-" , "CREAR CREDENCIALES" , 30 * "-")
-        usr = input("Nuevo usuario: ")
-        usr_list.append(usr)
-        pasw = input("Nueva contraseña: ")
-        pasw_list.append(pasw)
-        os.system('cls')
-    elif choice==2 and len(usr_list) !=0:
-        print (30 * "-" , "AUTENTICACION" , 30 * "-")
-        musr = input("usuario: ")
-        mpasw = input("contraseña: ")
 
-        for el in usr_list:
-            if el == musr:
-                if mpasw == pasw_list[usr_list.index(el)]:
-                    print("valido.")
-                else:
-                    print("contraseña invalida.")
+def print_menu_auth():
+    print (30 * "-" , "AUTENTICACION" , 30 * "-")
+    musr = input("usuario: ")
+    mpasw = input("contraseña: ")
+
+    a = 0
+    for key, value in usr_list.items():
+        if key == musr:
+            if value == mpasw:
+                print("\nvalido.")
             else:
-                a+=1
-                print(len(usr_list))
-                if a == len(usr_list):
-                    print("usuario invalido")
-        time.sleep(3)
-        os.system('cls')
-    elif choice==3:
-        break
-    else:
-        # Any integer inputs other than values 1-5 we print an error message
-        print("Error!")
+                print("\ncontraseña invalida.")
+        else:
+            a += 1
+            if a == len(usr_list):
+                print("\nusuario invalido")
+    input("\nPresione enter para continuar. ")
+    os.system('cls')
+
+if __name__ == "__main__":
+
+    while True:
+        print_menu()
+
+        try:
+            op = int(input("Entre el numero de una opcion [1-3]: "))
+        except:
+            op = 4
+
+        if op <= 3 and op > 0:
+            if op == 1:
+                os.system('cls')
+                print_menu_cred()
+            elif op == 2 and len(usr_list) != 0:
+                os.system('cls')
+                print_menu_auth()
+            elif op == 3:
+                break
+            else:
+                input("\nNo existen usuarios. Presione enter para continuar")
+                os.system('cls')
+        else:
+            input("\nOpcion invalida. Presione enter para continuar ")
+            os.system('cls')

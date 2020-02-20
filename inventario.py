@@ -3,12 +3,33 @@ import os
 
 lista = []
 
-class articulo:
+class Articulo:
     def __init__(self, id):
         self.id = id
 
-    def add(self):
-        lista.append(self.id)
+    def add(self, id, precio, cantidad):
+        lista.append({"id" : self.id, "precio" : precio, "cantidad" : cantidad})
+
+    def busqueda(self):
+        try:
+            z = [lista.index(i) for i in lista if i["id"] == self.id][0]
+        except:
+            z = -1
+        return z
+
+    def eliminar(self):
+        i = self.busqueda()
+        if i >= 0:
+            lista.pop(i)
+        else:
+            print("Articulo no encontrado")
+
+    def modificar(self):
+        i = self.busqueda()
+        if i >= 0 :
+            lista[i] = input("Nuevo nombre del articulo: ")
+        else:
+            print("Articulo no encontrado")
 
 
 def interfaz():
@@ -19,66 +40,6 @@ def interfaz():
     print ("4. Modificar articulos")
     print ("5. Guardar y Salir")
     print (67 * "-")
-
-def busqueda():
-    z = 0
-    art = input("Entre articulo a buscar: ")
-
-    for e in lista:
-        if e == art:
-            print("Articulo encontrado")
-            z = 1
-            break
-    if z == 0:
-        print("Articulo no encontrado")
-
-
-def agregar():
-    print (30 * "-" , "AGREGAR ARTICULO" , 30 * "-")
-    art = input("\nNuevo articulo: ")
-    objeto = articulo(art)
-    objeto.add()
-    os.system('cls')
-
-
-
-def eliminar():
-    print (30 * "-" , "ELIMINAR ARTICULO" , 30 * "-")
-    print(lista)
-    art = input("\nArt. por Eliminar: ")
-    i = 0
-    z = 0
-    for e in lista:
-        if e == art:
-            lista.pop(i)
-            z = 1
-            break
-        i += 1
-    if z == 0:
-        print("Articulo no encontrado")
-
-
-def modificar():
-    print(lista)
-    print (30 * "-" , "MODIFICAR ARTICULO" , 30 * "-")
-    art = input("\nArticulo por modificar: ")
-    i = 0
-    z = 0
-    for e in lista:
-        if e == art:
-            z = 1
-            lista[i] = input("Nuevo nombre del articulo: ")
-            break
-        i += 1
-    if z == 0:
-        print("Articulo no encontrado")
-
-def data_txt():
-    f = open('inventario.txt','w')
-    for el in lista:
-        f.write(el + "\n")
-    f.close()
-
 
 if __name__ == "__main__":
 
@@ -91,21 +52,58 @@ if __name__ == "__main__":
         except:
             op = 6
 
+        os.system('cls')
+
         if op <= 5 and op > 0:
             if op == 1:
+
+                print (30 * "-" , "BUSCAR ARTICULO" , 30 * "-")
+                art = input("\n Articulo que desea buscar: ")
+                obj = Articulo(art)
+                z = obj.busqueda()
+
+                if z >= 0 :
+                    print("Objeto encontrado")
+                    print(lista[z])
+                else:
+                    print("Objeto no encontrado")
+
+                input("\nPresione enter para continuar ")
                 os.system('cls')
-                busqueda()
+
             elif op == 2:
+                print (30 * "-" , "AGREGAR ARTICULO" , 30 * "-")
+                art = input("\nNuevo articulo: ")
+                precio = input("\nPrecio: ")
+                cantidad = input("\nCantidad: ")
+                obj = Articulo(art)
+                obj.add(art, precio, cantidad)
+                input("\nPresione enter para continuar ")
                 os.system('cls')
-                agregar()
+
             elif op == 3:
+                print (30 * "-" , "ELIMINAR ARTICULO" , 30 * "-")
+                print(lista)
+                art = input("\nArt. por Eliminar: ")
+                obj = Articulo(art)
+                obj.eliminar()
+                input("\nPresione enter para continuar ")
                 os.system('cls')
-                eliminar()
+
             elif op == 4:
+                print(lista)
+                print (30 * "-" , "MODIFICAR ARTICULO" , 30 * "-")
+                art = input("\nArticulo por modificar: ")
+                obj = Articulo(art)
+                obj.modificar()
+                input("\nPresione enter para continuar ")
                 os.system('cls')
-                modificar()
+
             elif op == 5:
-                data_txt()
+                f = open('inventario.txt','w')
+                for el in lista:
+                    f.write(el + "\n")
+                f.close()
                 break
         else:
             input("\nOpcion invalida. Presione enter para continuar ")

@@ -1,5 +1,6 @@
 #Autenticacion rudimentaria
 import re
+import getpass
 import os
 
 usr_list = {}
@@ -14,14 +15,14 @@ def print_menu():
 def print_menu_cred():
     print (30 * "-" , "CREAR CREDENCIALES" , 30 * "-")
     usr = input("Nuevo usuario: ")
-    pasw = input("Nueva contraseña: ")
+    pasw = getpass.getpass("Nueva contraseña: ")
     usr_list[usr] = pasw
     os.system('cls')
 
 def print_menu_auth():
     print (30 * "-" , "AUTENTICACION" , 30 * "-")
-    musr = input("usuario: ")
-    mpasw = input("contraseña: ")
+    musr = input("Usuario: ")
+    mpasw = getpass.getpass("Contraseña: ")
 
     a = 0
     for key, value in usr_list.items():

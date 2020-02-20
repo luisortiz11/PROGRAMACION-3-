@@ -31,7 +31,6 @@ class Articulo:
         else:
             print("Articulo no encontrado")
 
-
 def interfaz():
     print (30 * "-" , "MENU" , 30 * "-")
     print ("1. Buscar articulos")
@@ -41,24 +40,22 @@ def interfaz():
     print ("5. Guardar y Salir")
     print (67 * "-")
 
+def titulos(funcion):
+    print (30 * "-" , funcion + " ARTICULO" , 30 * "-")
+    art = input("\n Articulo que desea " + funcion + ": ")
+
 if __name__ == "__main__":
-
-
     while True:
         interfaz()
-
         try:
             op = int(input("Entre el numero de una opcion [1-5]: "))
         except:
             op = 6
-
         os.system('cls')
 
         if op <= 5 and op > 0:
             if op == 1:
-
-                print (30 * "-" , "BUSCAR ARTICULO" , 30 * "-")
-                art = input("\n Articulo que desea buscar: ")
+                titulos("BUSCAR")
                 obj = Articulo(art)
                 z = obj.busqueda()
 
@@ -72,8 +69,7 @@ if __name__ == "__main__":
                 os.system('cls')
 
             elif op == 2:
-                print (30 * "-" , "AGREGAR ARTICULO" , 30 * "-")
-                art = input("\nNuevo articulo: ")
+                titulos("AGREGAR")
                 precio = input("\nPrecio: ")
                 cantidad = input("\nCantidad: ")
                 obj = Articulo(art)
@@ -82,9 +78,8 @@ if __name__ == "__main__":
                 os.system('cls')
 
             elif op == 3:
-                print (30 * "-" , "ELIMINAR ARTICULO" , 30 * "-")
                 print(lista)
-                art = input("\nArt. por Eliminar: ")
+                titulos("ELIMINAR")
                 obj = Articulo(art)
                 obj.eliminar()
                 input("\nPresione enter para continuar ")
@@ -92,8 +87,7 @@ if __name__ == "__main__":
 
             elif op == 4:
                 print(lista)
-                print (30 * "-" , "MODIFICAR ARTICULO" , 30 * "-")
-                art = input("\nArticulo por modificar: ")
+                titulos("MODIFICAR")
                 obj = Articulo(art)
                 obj.modificar()
                 input("\nPresione enter para continuar ")

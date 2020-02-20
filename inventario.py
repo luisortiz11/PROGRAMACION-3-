@@ -27,7 +27,8 @@ class Articulo:
     def modificar(self):
         i = self.busqueda()
         if i >= 0 :
-            lista[i] = input("Nuevo nombre del articulo: ")
+            new = input("Nuevo nombre del articulo: ")
+            lista[i].update({"id" : new})
         else:
             print("Articulo no encontrado")
 
@@ -43,6 +44,7 @@ def interfaz():
 def titulos(funcion):
     print (30 * "-" , funcion + " ARTICULO" , 30 * "-")
     art = input("\n Articulo que desea " + funcion + ": ")
+    return art
 
 if __name__ == "__main__":
     while True:
@@ -55,7 +57,7 @@ if __name__ == "__main__":
 
         if op <= 5 and op > 0:
             if op == 1:
-                titulos("BUSCAR")
+                art = titulos("BUSCAR")
                 obj = Articulo(art)
                 z = obj.busqueda()
 
@@ -69,7 +71,7 @@ if __name__ == "__main__":
                 os.system('cls')
 
             elif op == 2:
-                titulos("AGREGAR")
+                art = titulos("AGREGAR")
                 precio = input("\nPrecio: ")
                 cantidad = input("\nCantidad: ")
                 obj = Articulo(art)
@@ -79,7 +81,7 @@ if __name__ == "__main__":
 
             elif op == 3:
                 print(lista)
-                titulos("ELIMINAR")
+                art = titulos("ELIMINAR")
                 obj = Articulo(art)
                 obj.eliminar()
                 input("\nPresione enter para continuar ")
@@ -87,7 +89,7 @@ if __name__ == "__main__":
 
             elif op == 4:
                 print(lista)
-                titulos("MODIFICAR")
+                art = titulos("MODIFICAR")
                 obj = Articulo(art)
                 obj.modificar()
                 input("\nPresione enter para continuar ")
@@ -95,8 +97,9 @@ if __name__ == "__main__":
 
             elif op == 5:
                 f = open('inventario.txt','w')
-                for el in lista:
-                    f.write(el + "\n")
+                for dict in lista:
+                    (i,j,k) = tuple(dict.values())
+                    f.write("Articulo: " + str(i) + ", Precio: " + str(j) + ", Cantidad: " + str(k)  + "\n")
                 f.close()
                 break
         else:

@@ -43,7 +43,7 @@ def interfaz():
 
 def titulos(funcion):
     print (30 * "-" , funcion + " ARTICULO" , 30 * "-")
-    art = input("\n Articulo que desea " + funcion + ": ")
+    art = input("\nArticulo que desea " + funcion + ": ")
     return art
 
 if __name__ == "__main__":
@@ -72,8 +72,8 @@ if __name__ == "__main__":
 
             elif op == 2:
                 art = titulos("AGREGAR")
-                precio = input("\nPrecio: ")
-                cantidad = input("\nCantidad: ")
+                precio = input("Precio: ")
+                cantidad = input("Cantidad: ")
                 obj = Articulo(art)
                 obj.add(art, precio, cantidad)
                 input("\nPresione enter para continuar ")

@@ -1,5 +1,4 @@
 #Autenticacion rudimentaria
-import re
 import getpass
 import os
 
@@ -56,6 +55,10 @@ if __name__ == "__main__":
                 os.system('cls')
                 print_menu_auth()
             elif op == 3:
+                f = open('creds.txt','w')
+                for usr, pass in usr_list.items():
+                    f.write("User: " + str(usr) + ", Password: " + str(pass) + "\n")
+                f.close()
                 break
             else:
                 input("\nNo existen usuarios. Presione enter para continuar")

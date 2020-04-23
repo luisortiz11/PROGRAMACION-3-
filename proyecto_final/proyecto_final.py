@@ -1,4 +1,5 @@
 #Autenticacion rudimentaria
+#Luis Ortiz
 import getpass
 import os
 

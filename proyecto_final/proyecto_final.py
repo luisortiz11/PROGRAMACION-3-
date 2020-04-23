@@ -13,9 +13,20 @@ def print_menu():
 
 def print_menu_cred():
     print (30 * "-" , "CREAR CREDENCIALES" , 30 * "-")
-    usr = input("Nuevo usuario: ")
-    pasw = getpass.getpass("Nueva contraseña: ")
-    usr_list[usr] = pasw
+    while True:
+        usr = input("Nuevo usuario: ")
+        pasw = getpass.getpass("Nueva contraseña: ")
+        z = 0
+        for el in list(usr_list.keys()):
+            if el == usr:
+                print("Usuario existente. Entre otro usuario.")
+            else:
+                z +=1
+        if z == len(list(usr_list.keys())):
+            usr_list[usr] = pasw
+            z = 0
+            break
+
     os.system('cls')
 
 def print_menu_auth():
@@ -56,8 +67,8 @@ if __name__ == "__main__":
                 print_menu_auth()
             elif op == 3:
                 f = open('creds.txt','w')
-                for usr, pass in usr_list.items():
-                    f.write("User: " + str(usr) + ", Password: " + str(pass) + "\n")
+                for i, j in usr_list.items():
+                    f.write("User: " + str(i) + ", Password: " + str(j) + "\n")
                 f.close()
                 break
             else:
